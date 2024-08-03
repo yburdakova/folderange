@@ -135,7 +135,15 @@ main{
 .navbar a{
   color: #9d9d9d;
 }
-
+#missing-files, #e-files {
+ margin-top: 20px;
+}
+h4{
+  font-weight: bold;
+}
+p{
+  margin-top: 10px;
+}
 .content {
   display: flex;
   gap: 40px;
@@ -145,11 +153,15 @@ input{
   border: 1px solid  #9d9d9d;
   border-radius: 5px;
 }
+
 form.range-form{
   display: flex;
   gap: 20px;
   align-items: center;
   margin-top: 40px;
+}
+.fange-form-lable{
+  font-weight: bold;
 }
 
 button {
@@ -177,6 +189,7 @@ button:hover {
   color: #000000;
   cursor: pointer;
 }
+
 .folders div.checked {
   background-color: #6293fa;
   color: rgb(0, 0, 0);
@@ -192,7 +205,30 @@ button:hover {
   min-height: 40px;
 }
 
-
+.copyable {
+  cursor: default;
+  display: inline-block;
+  margin: 5px 0;
+}
+#copy-notification {
+  position: fixed;
+  background-color: #007BFF;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+#copy-notification.visible {
+  transform: translate(-50%, 20px);
+  opacity: 1;
+}
+.hidden {
+  display: none;
+}
 @media screen and (max-width: 768px){
 
 }

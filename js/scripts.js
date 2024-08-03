@@ -3,8 +3,8 @@ document.querySelector('.range-form').addEventListener('submit', function(event)
   const input = document.querySelector('.range-form-input').value;
   const [start, end] = input.split('-').map(Number);
   const foldersDiv = document.querySelector('.folders');
-  foldersDiv.innerHTML = '<h3>Mark the folders that are in the box</h3>';
-
+  foldersDiv.innerHTML = '<h3>Mark the folders that are in the box</h3>'; // clear previous content
+  
   if (isNaN(start) || isNaN(end) || start > end) {
     alert('Please enter a valid range.');
     return;
@@ -53,9 +53,57 @@ document.querySelector('.range-form').addEventListener('submit', function(event)
       }
     }
 
-    document.querySelector('#missing-files p').textContent = missingFiles.join(', ');
-    document.querySelector('#e-files p').textContent = eFiles.join(', ');
+    const missingFilesText = formatMissingFiles(missingFiles);
+    const eFilesText = eFiles.join(', ');
+
+    document.querySelector('#missing-files p').textContent = missingFilesText;
+    document.querySelector('#e-files p').textContent = eFilesText;
+
+    // Add event listeners for copyable elements
+    document.querySelectorAll('.copyable').forEach(element => {
+      element.addEventListener('click', function(event) {
+        const text = event.target.textContent;
+        navigator.clipboard.writeText(text).then(() => {
+          showCopyNotification(event.clientX, event.clientY);
+        });
+      });
+    });
   });
 
   foldersDiv.appendChild(doneButton);
 });
+
+function formatMissingFiles(missingFiles) {
+  if (missingFiles.length === 0) {
+    return '';
+  }
+
+  let ranges = [];
+  let start = missingFiles[0];
+  let end = missingFiles[0];
+
+  for (let i = 1; i < missingFiles.length; i++) {
+    if (missingFiles[i] === end + 1) {
+      end = missingFiles[i];
+    } else {
+      ranges.push(start === end ? `${start}` : `${start}-${end}`);
+      start = missingFiles[i];
+      end = missingFiles[i];
+    }
+  }
+  ranges.push(start === end ? `${start}` : `${start}-${end}`);
+
+  return ranges.join(', ');
+}
+
+function showCopyNotification(x, y) {
+  const notification = document.getElementById('copy-notification');
+  notification.style.left = `${x}px`;
+  notification.style.top = `${y}px`;
+  notification.classList.remove('hidden');
+  notification.classList.add('visible');
+  setTimeout(() => {
+    notification.classList.remove('visible');
+    notification.classList.add('hidden');
+  }, 1500);
+}
