@@ -1,4 +1,4 @@
-# Folderrange
+# Folderange
 
 Folderrange is a utility application designed to assist users in organizing and tracking case files stored in a court box. The application simplifies the process of identifying and cataloging case files based on their folder numbers.
 
