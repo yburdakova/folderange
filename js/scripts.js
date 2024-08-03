@@ -3,7 +3,7 @@ document.querySelector('.range-form').addEventListener('submit', function(event)
   const input = document.querySelector('.range-form-input').value;
   const [start, end] = input.split('-').map(Number);
   const foldersDiv = document.querySelector('.folders');
-  foldersDiv.innerHTML = '<h3>Mark the folders that are in the box</h3>'; // clear previous content
+  foldersDiv.innerHTML = '<h3>Mark the folders that are in the box</h3>'; 
   
   if (isNaN(start) || isNaN(end) || start > end) {
     alert('Please enter a valid range.');
@@ -37,12 +37,15 @@ document.querySelector('.range-form').addEventListener('submit', function(event)
     foldersDiv.appendChild(div);
   }
 
+  foldersDiv.classList.remove('hidden');
+
   const doneButton = document.createElement('button');
   doneButton.classList.add('done-button');
   doneButton.textContent = 'DONE';
   doneButton.addEventListener('click', function() {
     const missingFiles = [];
     const eFiles = [];
+    let checkedCount = 0;
 
     for (let i = start; i <= end; i++) {
       const checkbox = document.getElementById(`folder-${i}`);
@@ -50,6 +53,7 @@ document.querySelector('.range-form').addEventListener('submit', function(event)
         missingFiles.push(i);
       } else {
         eFiles.push(`0${i}`);
+        checkedCount++;
       }
     }
 
@@ -58,8 +62,8 @@ document.querySelector('.range-form').addEventListener('submit', function(event)
 
     document.querySelector('#missing-files p').textContent = missingFilesText;
     document.querySelector('#e-files p').textContent = eFilesText;
+    document.querySelector('#amount p').textContent = checkedCount;
 
-    // Add event listeners for copyable elements
     document.querySelectorAll('.copyable').forEach(element => {
       element.addEventListener('click', function(event) {
         const text = event.target.textContent;
@@ -68,6 +72,9 @@ document.querySelector('.range-form').addEventListener('submit', function(event)
         });
       });
     });
+
+    document.querySelector('.final-data').classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
   foldersDiv.appendChild(doneButton);
