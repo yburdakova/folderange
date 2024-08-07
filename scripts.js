@@ -3,7 +3,7 @@ document.querySelector('.range-form').addEventListener('submit', function(event)
   const input = document.querySelector('.range-form-input').value;
   const [start, end] = input.split('-').map(Number);
   const foldersDiv = document.querySelector('.folders');
-  foldersDiv.innerHTML = '<h3>Mark the folders that are in the box</h3>'; 
+  foldersDiv.innerHTML = '<h3 class="title">Mark the folders that are in the box</h3>'; 
   
   if (isNaN(start) || isNaN(end) || start > end) {
     alert('Please enter a valid range.');
@@ -24,6 +24,12 @@ document.querySelector('.range-form').addEventListener('submit', function(event)
     const div = document.createElement('div');
     div.appendChild(checkbox);
     div.appendChild(label);
+
+    // Automatically check the first and last checkbox
+    if (i === start || i === end) {
+      checkbox.checked = true;
+      div.classList.add('checked');
+    }
 
     div.addEventListener('click', function() {
       checkbox.checked = !checkbox.checked;
@@ -59,10 +65,12 @@ document.querySelector('.range-form').addEventListener('submit', function(event)
 
     const missingFilesText = formatMissingFiles(missingFiles);
     const eFilesText = eFiles.join(', ');
+    const eRangeText = `0${start}-0${end}`;
 
     document.querySelector('#missing-files p').textContent = missingFilesText;
     document.querySelector('#e-files p').textContent = eFilesText;
     document.querySelector('#amount p').textContent = checkedCount;
+    document.querySelector('#e-range p').textContent = eRangeText;
 
     document.querySelectorAll('.copyable').forEach(element => {
       element.addEventListener('click', function(event) {
@@ -93,12 +101,24 @@ function formatMissingFiles(missingFiles) {
     if (missingFiles[i] === end + 1) {
       end = missingFiles[i];
     } else {
-      ranges.push(start === end ? `${start}` : `${start}-${end}`);
+      if (end === start) {
+        ranges.push(`0${start}`);
+      } else if (end === start + 1) {
+        ranges.push(`0${start}`, `0${end}`);
+      } else {
+        ranges.push(`0${start}-0${end}`);
+      }
       start = missingFiles[i];
       end = missingFiles[i];
     }
   }
-  ranges.push(start === end ? `${start}` : `${start}-${end}`);
+  if (end === start) {
+    ranges.push(`0${start}`);
+  } else if (end === start + 1) {
+    ranges.push(`0${start}`, `0${end}`);
+  } else {
+    ranges.push(`0${start}-0${end}`);
+  }
 
   return ranges.join(', ');
 }
