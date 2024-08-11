@@ -87,6 +87,10 @@ h1{
   line-height: 1.1;
 }
 
+h4{
+  margin-bottom: 5px;
+}
+
 .container {
   max-width: 970px;
   margin: 0 auto;
@@ -127,8 +131,8 @@ h3{
 .navbar a{
   color: #9d9d9d;
 }
-#missing-files, #e-files, #e-range {
- margin-top: 20px;
+#missing-files, #e-files, #e-range, #barcode, #box-number, #amount {
+  margin-top: 20px;
 }
 h4{
   font-weight: bold;
@@ -216,12 +220,12 @@ button:hover {
   font-size: 10px;
   top: 0;
   left: 50%;
-  transform: translate(-50%, -100%);
+  transform: translate(0%, 60%);
   opacity: 0;
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 #copy-notification.visible {
-  transform: translate(-50%, 20px);
+  transform: translate(0%, 60%);
   opacity: 1;
 }
 .hidden {
@@ -234,6 +238,25 @@ footer{
   display: flex;
   justify-content:center;
 }
+.autocomplete-suggestions {
+  border: 1px solid #ccc;
+  max-height: 160px;
+  width: 156px;
+  overflow-y: auto;
+  background-color: #fff;
+  position: absolute;
+  top: 160px;
+  left: 496px;
+  z-index: 10;
+}
+.autocomplete-suggestion {
+  padding: 8px;
+  cursor: pointer;
+}
+.autocomplete-suggestion:hover {
+  background-color: #e0e0e0;
+}
+
 @media screen and (max-width: 768px){
 
 }

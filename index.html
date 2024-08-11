@@ -19,6 +19,9 @@
     <div class="container">
       <h1 class="body-content-title">Box Inspection Tool</h1>
       <form class="range-form">
+        <h2 class="fange-form-lable">Choose the box</h2>
+        <input type="text" id="barcodeInput">
+        <div id="autocomplete-container" class="autocomplete-suggestions"></div>
         <h2 class="fange-form-lable">Enter folder range</h2>
         <input type="text" class="range-form-input">
         <button type="submit">Apply</button>
@@ -29,8 +32,16 @@
         </div>
         <div class="final-data hidden">
           <h3 class="title">Click on the string of numbers to copy</h3>
+          <div id="barcode">
+            <h4>Barcode for using in Boxy:</h4>
+            <p class="copyable"></p>
+          </div>
+          <div id="box-number">
+            <h4>Number of box for using in BoxUtility:</h4>
+            <p class="copyable"></p>
+          </div>
           <div id="amount">
-            <h4>Amount of folders in the box</h4>
+            <h4>Amount of folders in the box:</h4>
             <p class="copyable"></p>
           </div>
           <div id="e-range">
@@ -38,11 +49,11 @@
             <p class="copyable"></p>
           </div>
           <div id="missing-files">
-            <h4>Missing Files</h4>
+            <h4>Missing Files:</h4>
             <p class="copyable"></p>
           </div>
           <div id="e-files">
-            <h4>Numbers of E-Files</h4>
+            <h4>Numbers of E-Files:</h4>
             <p class="copyable"></p>
           </div>
         </div>
@@ -58,5 +69,6 @@
   </footer>
   <div id="copy-notification" class="hidden">Copied!</div>
   <script src="scripts.js"></script>
+  <script src="constants.js"></script>
 </body>
 </html>
