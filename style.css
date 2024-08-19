@@ -238,6 +238,9 @@ footer{
   display: flex;
   justify-content:center;
 }
+.barcodeBox{
+  position: relative;
+}
 .autocomplete-suggestions {
   border: 1px solid #ccc;
   max-height: 160px;
@@ -245,8 +248,8 @@ footer{
   overflow-y: auto;
   background-color: #fff;
   position: absolute;
-  top: 160px;
-  left: 496px;
+  top: 30px;
+  left: 0px;
   z-index: 10;
 }
 .autocomplete-suggestion {
