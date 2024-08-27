@@ -131,7 +131,7 @@ h3{
 .navbar a{
   color: #9d9d9d;
 }
-#missing-files, #e-files, #e-range, #barcode, #box-number, #amount {
+#missing-files, #e-files, #e-range, #barcode, #box-number, #amount, #root-dir {
   margin-top: 20px;
 }
 h4{
